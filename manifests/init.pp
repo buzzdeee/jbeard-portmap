@@ -45,7 +45,7 @@ class portmap (
 
     anchor { 'portmap::begin': }
 
-    case $::osfamily {
+    case $facts['os']['family'] {
         'RedHat': {
             class { 'portmap::rhel':
                 package => $package,
@@ -67,7 +67,7 @@ class portmap (
             }
         }
         default : {
-            fail("portmap is not currently supported on ${::operatingsystem}")
+            fail("portmap is not currently supported on ${facts['os']['name']}")
         }
     }
 
